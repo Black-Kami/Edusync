@@ -1,0 +1,79 @@
+.proposal_container {
+            display: grid;
+            flex: 1;
+            grid-template-columns: 1fr;
+            grid-template-rows: 75px auto;
+            grid-template-areas:
+                "head"
+                "content";
+            height: 100%;
+            grid-gap: 5px;
+        }
+
+        .proposal_head {
+            grid-area: head;
+            display: flex;
+            background-color: rgba(227, 200, 200, 0.7);
+            height: auto;
+            padding: 1rem 2rem;
+            align-items: center;
+            border-bottom: solid;
+            justify-content: space-between;
+        }
+
+        .porposal_content {
+            grid-area: content;
+            display: table-row;
+            background-color: rgba(108, 101, 101, 0.77);
+            height: auto;
+        }
+
+        .proposal_create_button {
+            background-color: rgba(45, 77, 193, 0.8);
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .proposal_activity {
+            display: flex;
+            justify-content: space-between;
+            background-color: rgba(255, 255, 255, 0.6);
+            height: 50px;
+            padding: 1rem 2rem;
+            align-items: center;
+            border-radius: 10px;
+            border: 1px solid #333;
+            margin-left: 1rem;
+            margin-right: 1rem;
+        }
+
+        .proposal_property {
+            display: flex;
+            justify-content: space-between;
+            background-color: rgba(255, 255, 255, 0.6);
+            height: 50px;
+            padding: 1rem 2rem;
+            align-items: center;
+            border-radius: 10px;
+            border: 1px solid #333;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            margin-top: 5px;
+        }
+
+        .proposal_budget {
+            display: flex;
+            justify-content: space-between;
+            background-color: rgba(255, 255, 255, 0.6);
+            height: 50px;
+            padding: 1rem 2rem;
+            align-items: center;
+            border-radius: 10px;
+            border: 1px solid #333;
+            margin-left: 1rem;
+            margin-right: 1rem;
+            margin-top: 5px;
+        }

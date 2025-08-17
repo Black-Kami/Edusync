@@ -1,0 +1,113 @@
+ 
+        .article_container {
+            width: 100%;
+            display: grid;
+            flex: 1;
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            grid-template-areas:
+                "dashboard";
+            height: 100%;
+        }
+        .dashboard {
+            width: 100%;
+            grid-area: dashboard;
+            display: grid;
+            height: fit-content;
+            background-color: grey;
+            grid-template-areas:
+                "head            head"
+                "calendar        pending"
+                "calendar        current_event"
+                "calendar        upcoming_event"
+                "event_status    event_status";
+            grid-template-columns: 4fr 1fr;
+            grid-template-rows: 50px 245px 245px 238px 335px;
+            grid-gap: 5px;
+            padding-left: 5px;
+
+        }
+        .dashboard_head {
+            grid-area: head;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            background-color: whitesmoke;
+            border-radius: 5px;
+            padding-left: 2rem;
+        }
+        .activity_head {
+            grid-area: head;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            background-color: whitesmoke;
+            border-radius: 5px;
+            padding-left: 2rem;
+            justify-content: space-between;
+            padding-right: 2rem;
+        }
+        .calendar {
+            background-color: rgba(98, 242, 156, 0.8);
+            grid-area: calendar;
+            border-radius: 10px;
+            min-width: 4fr;
+            overflow: hidden;
+        }
+        .current_event {
+
+            background-color: rgba(255, 110, 110, 0.8);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            grid-area: current_event;
+        }
+        .pending {
+
+            background-color: rgba(255, 110, 110, 0.8);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            grid-area: pending;
+        }
+        .upcoming_event {
+
+            background-color: rgba(255, 110, 110, 0.8);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            grid-area: upcoming_event;
+        }
+        .event_status {
+            background-color: rgba(35, 35, 16, 0.8);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            grid-area: event_status;
+
+        }
+        .event_folder_status {
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 25%;
+            display: flex;
+            padding: 1rem 2rem;
+            gap: 4rem;
+            align-items: center;
+            display: flex;
+            font-size: 1.2rem;
+        }
+        button {
+            border: none;
+            font-size: large;
+            background-color: transparent;
+        }
+        .event_folder {
+            background-color: rgba(255, 255, 255, 0.8);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-top: 5px;
+            width: 100%;
+            height: 73%;
+
+        }
+        .day{
+            height: 103px;
+        }
+        

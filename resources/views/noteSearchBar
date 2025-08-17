@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Search Bar Header</title>
+    <style>
+        :root {
+            --primary-color: #3a86ff;
+            --secondary-color: #8338ec;
+            --text-color: #2b2d42;
+            --light-color: #f8f9fa;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 2rem;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 2rem;
+        }
+
+        .search-form {
+            display: flex;
+            width: 100%;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.75rem 1.25rem;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .search-button {
+            background-color: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .search-button:hover {
+            background-color: var(--light-color);
+        }
+
+        .search-results {
+            position: absolute;
+            width: 100%;
+            background: white;
+            border-radius: 0 0 10px 10px;
+            box-shadow: var(--shadow);
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 100;
+        }
+
+        .search-result-item {
+            padding: 0.75rem 1.25rem;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .search-result-item:hover {
+            background-color: #f5f5f5;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem;
+            border-radius: 5px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-container {
+                margin: 1rem 0;
+                order: 1;
+                width: 100%;
+            }
+
+            .nav-links {
+                order: 2;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="#" class="logo">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c74fbf62-882b-4e2e-9c9d-8b75e5d6931e.png" alt="Company logo - abstract blue and purple geometric shape" class="logo-icon" />
+                SearchApp
+            </a>
+
+            <div class="search-container">
+                <form class="search-form" id="searchForm">
+                    <input 
+                        type="search" 
+                        class="search-input" 
+                        id="searchInput" 
+                        placeholder="Search for products, articles..." 
+                        aria-label="Search"
+                        autocomplete="off"
+                    >
+                    <button type="submit" class="search-button">Search</button>
+                </form>
+                <div class="search-results" id="searchResults">
+                    <!-- Results will be populated here by JavaScript -->
+                </div>
+            </div>
+
+            <nav class="nav-links">
+                <a href="#" class="nav-link">Home</a>
+                <a href="#" class="nav-link">Products</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding: 2rem; max-width: 1200px; margin: 0 auto;">
+        <h1>Welcome to Our Website</h1>
+        <p>Try searching for something using the header search bar. This implementation includes:</p>
+        <ul>
+            <li>Responsive design that works on all screen sizes</li>
+            <li>Typeahead search functionality</li>
+            <li>Accessible markup with proper ARIA labels</li>
+            <li>Smooth animations and transitions</li>
+            <li>Clean, modern UI with gradient header</li>
+        </ul>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchForm = document.getElementById('searchForm');
+            const searchInput = document.getElementById('searchInput');
+            const searchResults = document.getElementById('searchResults');
+            let searchTimeout;
+
+            // Mock search function (replace with actual API call in production)
+            function performSearch(query) {
+                return new Promise(resolve => {
+                    // Simulate network delay
+                    setTimeout(() => {
+                        if (!query.trim()) {
+                            resolve([]);
+                            return;
+                        }
+                        
+                        // Mock data - replace with real data from your backend
+                        const mockResults = [
+                            { title: `${query} Product`, category: 'Products' },
+                            { title: `Guide to ${query}`, category: 'Articles' },
+                            { title: `${query} Service`, category: 'Services' },
+                            { title: `About ${query}`, category: 'Information' },
+                        ];
+                        
+                        resolve(mockResults);
+                    }, 300);
+                });
+            }
+
+            // Display loading state
+            function showLoading() {
+                searchResults.innerHTML = '<div class="loading"><div class="loading-spinner"></div></div>';
+                searchResults.style.display = 'block';
+            }
+
+            // Display search results
+            function displayResults(results) {
+                if (results.length === 0) {
+                    searchResults.innerHTML = '<div class="search-result-item">No results found</div>';
+                    searchResults.style.display = 'block';
+                    return;
+                }
+
+                searchResults.innerHTML = '';
+                results.forEach(result => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.innerHTML = `
+                        <strong>${result.title}</strong>
+                        <div style="font-size: 0.8rem; color: #666;">${result.category}</div>
+                    `;
+                    item.addEventListener('click', () => {
+                        alert(`You selected: ${result.title}`);
+                        searchResults.style.display = 'none';
+                    });
+                    searchResults.appendChild(item);
+                });
+                searchResults.style.display = 'block';
+            }
+
+            // Handle search input
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                const query = this.value.trim();
+                
+                if (query.length < 2) {
+                    searchResults.style.display = 'none';
+                    return;
+                }
+
+                showLoading();
+                
+                searchTimeout = setTimeout(async () => {
+                    const results = await performSearch(query);
+                    displayResults(results);
+                }, 500);
+            });
+
+            // Handle form submission
+            searchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const query = searchInput.value.trim();
+                if (query) {
+                    alert(`Performing search for: ${query}`);
+                    // In a real app, you would submit the form or redirect to search results page
+                    // For PHP implementation, you would set action="search.php" on the form
+                }
+            });
+
+            // Hide results when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!searchForm.contains(e.target)) {
+                    searchResults.style.display = 'none';
+                }
+            });
+
+            // Handle keyboard navigation
+            searchInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    searchResults.style.display = 'none';
+                }
+            });
+        });
+
+        // PHP Integration Note:
+        // To connect with PHP backend:
+        // 1. Add action="search.php" to the form element
+        // 2. Add method="get" or method="post" depending on your needs
+        // 3. Ensure your PHP script processes the search query and returns results
+        // 4. For real-time results, consider using fetch() API to a PHP endpoint
+    </script>
+</body>
+</html>
+

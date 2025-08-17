@@ -1,0 +1,68 @@
+.interaction-section {
+    display: flex;
+    gap: 2rem;
+    justify-content: right;
+    align-items: right;
+}
+
+.click-trigger {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    background: #2ecc71;
+    color: white;
+    text-decoration: none;
+}
+
+
+.click-trigger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+    display: none;
+    max-width: 1fr;
+    max-height: 1fr;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.calendar-popup {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 6px;
+    display: none;
+}
+
+.close-btn {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 30px;
+    height: 30px;
+    background: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+    transform: scale(1.1);
+    background: #c0392b;
+}
