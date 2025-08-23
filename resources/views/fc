@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Borrowing Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Property Borrowing Form</h1>
+    <form action="submit_form.php" method="POST">
+        <label for="venue">Venue:</label>
+        <input type="text" id="venue" name="venue" required>
+
+        <label for="title">Title Name:</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="from_date">From:</label>
+        <input type="date" id="from_date" name="from_date" required>
+
+        <label for="to_date">To:</label>
+        <input type="date" id="to_date" name="to_date" required>
+
+        <h3>Please List Down the Items</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Particulars/ Items</th>
+                    <th>Quantity</th>
+                    <th>Remarks</th>
+                    <th>Date Needed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text" name="item1" placeholder="Table"></td>
+                    <td><input type="number" name="qty1" placeholder="20"></td>
+                    <td><input type="text" name="remarks1" placeholder="--"></td>
+                    <td><input type="date" name="date_needed1"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item2" placeholder="Chair"></td>
+                    <td><input type="number" name="qty2" placeholder="50"></td>
+                    <td><input type="text" name="remarks2" placeholder="--"></td>
+                    <td><input type="date" name="date_needed2"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="item3" placeholder="Speaker"></td>
+                    <td><input type="number" name="qty3" placeholder="2"></td>
+                    <td><input type="text" name="remarks3" placeholder="--"></td>
+                    <td><input type="date" name="date_needed3"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+</body>
+</html>

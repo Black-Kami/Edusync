@@ -8,13 +8,16 @@
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('css/main_calendar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/event_folder_popup.css') }}">
     <script src="{{ asset('js/profile.js') }}"></script>
     <script src="{{ asset('js/main_calendar.js') }}"></script>
+    <script src="{{ asset('js/event_folder_popup.js') }}"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
 </head>
-<body class="min-h-screen py-0 px-0">
+
+<body class="min-h-screen py-0 px-0" >
     <header>
         <div class="logo">EduSync</div>
         <div class="profile" id="profileButton">
@@ -40,7 +43,7 @@
             </div>
         </div>
     </header>
-    <main class="max-w-0x5 mx-auto">
+    <main style="height: 100%;">
         <nav class="navigation">
             <a href="/dashboard"><i class="fas fa-home"></i><br> Home</a>
             <a href="/activity"><i class="fas fa-file-alt"></i><br> Activity</a>
@@ -48,8 +51,8 @@
             <a href="/evaluation"><i class="fas fa-file-alt"></i><br> Evaluation</a>
             <a href="/event"><i class="fas fa-file-alt"></i><br> Event</a>
         </nav>
-        <section class="article_container">
-            <div class="dashboard" >
+        <section class="article_container" style="max-height: 100%;">
+            <div class="dashboard" style="height: 100%;">
                 <div class="dashboard_head">
                     <h2 style="font-weight: bolder;">Dashboard</h2>
                 </div>
@@ -91,18 +94,25 @@ $upcomingEvent = 0;
 echo "<h1 style='font-size: 24px; padding: 5px 15px; text-align: left;'>Upcoming Event {$upcomingEvent}</h1>";
                     ?>
                 </div>
-                <div class="event_status">
+                <div class="event_status" >
                     <div class="event_folder_status">
                         <h2 style="font-weight: bolder">Event</h2>
-                       <div class="folder_status" >
-                       </div>
+                        <div class="folder_status">
+                        </div>
                     </div>
-                    <div class="event_folder">
-                        <div class="folder_status " >
+                    <div class="event_folder" style="height: 100%;">
+                        <div class="folder_status " style="padding: 1rem; ">
+                            
+                                <div class="demo-block" id="demoBlock">
+                                   
+                                </div>
+
+                               <button class="toggle-button" onclick="toggleDisplay()">Toggle Display</button>
+                            
                         </div>
                     </div>
                 </div>
-            </div>   
+            </div>
         </section>
     </main>
     <footer>
@@ -114,6 +124,7 @@ echo "<h1 style='font-size: 24px; padding: 5px 15px; text-align: left;'>Upcoming
             <span>About</span>
         </div>
     </footer>
-    
+
 </body>
+
 </html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hide & Show with Display: None</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f8fafc;
+            color: #2d3748;
+            line-height: 1.6;
+            padding: 20px;
+            text-align: center;
+        }
+
+        
+        .toggle-button {
+            background: #4299e1;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+
+        .toggle-button:hover {
+            background: #3182ce;
+        }
+
+        .demo-block {
+            background: #edf2f7;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #cbd5e0;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);" >
+        <h1>Hide & Show Block</h1>
+        <p>Click the button to toggle the visibility of the block below.</p>
+        
+        <button class="toggle-button" onclick="toggleDisplay()">Toggle Display</button>
+        
+        <div class="demo-block" id="demoBlock">
+            <h3>Demo Block</h3>
+            <p>This block can be hidden or shown using <code>display: none</code>.</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleDisplay() {
+            const block = document.getElementById('demoBlock');
+            block.style.display = block.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>

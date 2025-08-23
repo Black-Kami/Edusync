@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highcharts Circular Progress</title>
+
+    <!-- Highcharts CDN -->
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        
+
+        
+
+        .chart-container {
+            width: 100%;
+            height: 250px;
+            margin: 15px 0 25px 0;
+        }
+
+        .controls {
+            margin: 25px 0;
+        }
+
+        .control-group {
+            margin-bottom: 15px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4a5568;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #edf2f7;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: #4299e1;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 1px 4px rgba(66, 153, 225, 0.3);
+        }
+
+        .value-display {
+            min-width: 50px;
+            text-align: center;
+            font-weight: 600;
+            background: #4299e1;
+            color: white;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+        }
+
+        .status-text {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: #718096;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .chart-container {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div style="background: #fafafa; border-radius: 12px; padding: 30px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); text-align: center; max-width: 400px; width: 100%;">
+        <div style="margin-bottom: 25px;">
+            <h1 style="font-size: 1.8rem; color: #2d3748; margin-bottom: 8px; font-weight: 600;">event name</h1>
+            <p style="color: #718096; font-size: 0.95rem;">event description</p>
+        </div>
+
+        <div id="circularProgress" class="chart-container"></div>
+
+        <div class="controls">
+            <div class="control-group">
+                <label>Adjust Progress (0-100%):</label>
+                <div class="slider-container">
+                    <input type="range" id="progressSlider" min="0" max="100" value="0" step="1">
+                    <span class="value-display" id="progressValue">0%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-text">
+            <p>Drag to update progress in real-time</p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize circular progress chart
+        document.addEventListener('DOMContentLoaded', function () {
+            const circularProgress = Highcharts.chart('circularProgress', {
+                chart: {
+                    type: 'solidgauge',
+                    backgroundColor: 'transparent',
+                    marginTop: 0,
+                    marginBottom: 0
+                },
+                title: null,
+                pane: {
+                    center: ['50%', '50%'],
+                    size: '85%',
+                    startAngle: -90,
+                    endAngle: 90,
+                    background: {
+                        backgroundColor: '#f7fafc',
+                        innerRadius: '60%',
+                        outerRadius: '100%',
+                        shape: 'arc',
+                        borderWidth: 0
+                    }
+                },
+                tooltip: {
+                    enabled: false
+                },
+                yAxis: {
+                    min: 0,
+                    max: 100,
+                    lineWidth: 0,
+                    tickWidth: 0,
+                    minorTickInterval: null,
+                    tickAmount: 2,
+                    labels: {
+                        y: 16,
+                        style: {
+                            fontSize: '12px',
+                            color: '#718096'
+                        }
+                    }
+                },
+                plotOptions: {
+                    solidgauge: {
+                        dataLabels: {
+                            y: 5,
+                            borderWidth: 0,
+                            useHTML: true
+                        }
+                    }
+                },
+                credits: {
+                    enabled: false
+                },
+                series: [{
+                    name: 'Progress',
+                    data: [0],
+                    dataLabels: {
+                        format: '<div style="text-align:center">' +
+                            '<span style="font-size:24px;font-weight:600;color:#2d3748">{y}%</span><br/>' +
+                            '<span style="font-size:12px;color:#a0aec0">COMPLETE</span></div>'
+                    },
+                    tooltip: {
+                        valueSuffix: '% complete'
+                    }
+                }]
+            });
+
+            // Slider event listener
+            const slider = document.getElementById('progressSlider');
+            const valueDisplay = document.getElementById('progressValue');
+
+            slider.addEventListener('input', function (e) {
+                const value = parseInt(e.target.value);
+                valueDisplay.textContent = value + '%';
+
+                // Update chart with animation
+                circularProgress.series[0].points[0].update(value, true, true, {
+                    duration: 200
+                });
+
+                // Update color based on progress
+                let color;
+                if (value < 30) {
+                    color = '#fc8181'; // Red
+                } else if (value < 70) {
+                    color = '#f6ad55'; // Orange
+                } else {
+                    color = '#68d391'; // Green
+                }
+
+                circularProgress.series[0].update({
+                    color: color
+                });
+            });
+
+            // Make chart responsive
+            window.addEventListener('resize', function () {
+                circularProgress.reflow();
+            });
+        });
+    </script>
+</body>
+
+</html>
