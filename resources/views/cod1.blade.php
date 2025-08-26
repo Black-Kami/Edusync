@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Daily Item Request Form</title>
     <style>
+       <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f5f5;
@@ -217,6 +218,7 @@
                                     <input type="date" id="dateNeeded-${formCounter}-1" name="dateNeeded" class="input-field w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none">
                                     <p id="dateNeededError-${formCounter}-1" class="error-message hidden">Please select a date</p>
                                 </div>
+                                <button type="button" onclick="removeItem(${formCounter}, 1)">Delete</button>
                             </div>
                         </div>
                         <button type="button" onclick="addNewItem(${formCounter})">+ Add Another Item</button>
@@ -233,7 +235,7 @@
             const itemCount = itemFieldsContainer.children.length + 1; // Count existing items
 
             const newItemHtml = `
-                <div class="form-row">
+                <div class="form-row" id="item-row-${formId}-${itemCount}">
                     <div class="form-group">
                         <label for="item-${formId}-${itemCount}" class="block text-sm font-medium text-gray-700 mb-1">Item *</label>
                         <input type="text" id="item-${formId}-${itemCount}" name="item" class="input-field w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none">
@@ -249,10 +251,18 @@
                         <input type="date" id="dateNeeded-${formId}-${itemCount}" name="dateNeeded" class="input-field w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none">
                         <p id="dateNeededError-${formId}-${itemCount}" class="error-message hidden">Please select a date</p>
                     </div>
+                    <button type="button" onclick="removeItem(${formId}, ${itemCount})">Delete</button>
                 </div>
             `;
 
             itemFieldsContainer.insertAdjacentHTML('beforeend', newItemHtml);
+        }
+
+        function removeItem(formId, itemCount) {
+            const itemRow = document.getElementById(`item-row-${formId}-${itemCount}`);
+            if (itemRow) {
+                itemRow.remove();
+            }
         }
 
         function removeForm(formId) {
